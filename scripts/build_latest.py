@@ -186,7 +186,7 @@ def build_ai_prompt(cat_name: str, cat: dict, trend: dict) -> str:
     fallers = trend.get("top_fallers", [])
     fallers_text = "、".join(f"《{f['title']}》{f['change']}" for f in fallers) if fallers else "无"
 
-    return f"""你是一位网文行业分析师。请根据以下数据，为番茄小说「{cat_name}」分类新书榜生成结构化分析。
+    return f"""你是一位网文行业分析师。请根据以下数据，为番茄小说「{cat_name}」分类{BOARD_LABEL}生成结构化分析。
 
 ## 当前榜单 Top 20
 {intros_text}
@@ -220,6 +220,16 @@ def build_ai_prompt(cat_name: str, cat: dict, trend: dict) -> str:
 BATCH_SIZE = 3  # 每批合并的分类数
 
 MARKET_PERIODS = [("7", 7), ("14", 14), ("30", 30), ("all", None)]
+
+# 与 scrape_fanqie_ranks.py 的 BOARDS 保持一致。
+# 每个榜单的快照、趋势和接口都各自独立在 data/<board>/ 与 api/<board>/ 下。
+BOARDS = {
+    "new": {"label": "新书榜"},
+    "read": {"label": "阅读榜"},
+}
+
+# 当前正在构建的榜单名称，供 AI prompt 用。build_board() 每轮开始时设置。
+BOARD_LABEL = BOARDS["new"]["label"]
 
 GENRE_GROUPS = [
     {"name": "玄幻仙侠", "categories": ["传统玄幻", "东方仙侠", "西方奇幻", "玄幻脑洞"]},
@@ -314,7 +324,7 @@ def build_batch_ai_prompt(batch: list) -> str:
 
     return (
         f"你是一位网文行业分析师。请根据以下数据，"
-        f"为番茄小说的多个分类新书榜分别生成结构化分析。\n\n"
+        f"为番茄小说的多个分类{BOARD_LABEL}分别生成结构化分析。\n\n"
         f"{all_sections}\n\n"
         f"## 输出要求\n\n"
         f"请严格按照以下格式，为每个分类分别输出分析。"
@@ -368,15 +378,15 @@ def write_json(path: str, payload: dict):
         json.dump(payload, f, ensure_ascii=False, indent=2)
 
 
-def build_lastest_api(output: dict, base_dir: str):
-    """生成静态 lastest 数据接口。
+def build_lastest_api(output: dict, base_dir: str, board: str):
+    """生成静态 lastest 数据接口（按榜单分目录）。
 
     GitHub Pages 不支持动态 query API，因此这里将 type 参数映射为静态文件：
-    - api/lastest/all.json：全量数据
-    - api/lastest/<type>.json：单个类型数据
-    - api/lastest.json / api/lastest/index.json：类型索引
+    - api/<board>/lastest/all.json：全量数据
+    - api/<board>/lastest/<type>.json：单个类型数据
+    - api/<board>/lastest.json / api/<board>/lastest/index.json：类型索引
     """
-    api_root = os.path.join(base_dir, "api")
+    api_root = os.path.join(base_dir, "api", board)
     lastest_dir = os.path.join(api_root, "lastest")
     os.makedirs(lastest_dir, exist_ok=True)
     for old_path in glob.glob(os.path.join(lastest_dir, "*.json")):
@@ -396,7 +406,7 @@ def build_lastest_api(output: dict, base_dir: str):
 
     types = [{
         "type": "all",
-        "url": "api/lastest/all.json",
+        "url": f"api/{board}/lastest/all.json",
         "category_count": len(categories),
         "book_count": sum(len(cat.get("books", [])) for cat in categories),
     }]
@@ -421,7 +431,7 @@ def build_lastest_api(output: dict, base_dir: str):
         }
         write_json(os.path.join(lastest_dir, f"{filename}.json"), payload)
 
-        url = f"api/lastest/{quote(filename)}.json"
+        url = f"api/{board}/lastest/{quote(filename)}.json"
         types.append({
             "type": type_name,
             "url": url,
@@ -714,7 +724,7 @@ def build_market_ai_prompt(payload: dict) -> str:
             f"- 规则兜底: {data['fallback_summary']}"
         )
 
-    return f"""你是一位网文市场编辑，请根据番茄男频新书榜的统计结果，为每个周期生成一段全站热点判断。
+    return f"""你是一位网文市场编辑，请根据番茄男频{BOARD_LABEL}的统计结果，为每个周期生成一段全站热点判断。
 
 {chr(10).join(sections)}
 
@@ -948,37 +958,33 @@ def generate_ai_summaries(categories: list, trends: dict,
     return trends
 
 
-def main():
-    parser = argparse.ArgumentParser(description="构建 latest_ranks.json")
-    parser.add_argument("--force", action="store_true",
-                        help="强制重新生成所有 AI 总结，忽略已有总结")
-    parser.add_argument("--date", type=str, default="",
-                        help="指定目标日期 (YYYY-MM-DD)，默认使用最新快照")
-    args = parser.parse_args()
+def build_board(board: str, args, base_dir: str) -> bool:
+    """构建单个榜单的全部产物。返回 False 表示该榜单没有数据，已跳过。"""
+    global BOARD_LABEL
+    BOARD_LABEL = BOARDS[board]["label"]
 
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    data_dir = os.path.join(base_dir, "data")
+    data_dir = os.path.join(base_dir, "data", board)
     trends_dir = os.path.join(data_dir, "trends")
     os.makedirs(trends_dir, exist_ok=True)
 
     # 查找 JSON 快照文件
     snapshots = sorted(
-        glob.glob(os.path.join(data_dir, "fanqie_male_new_ranks_*.json"))
+        glob.glob(os.path.join(data_dir, f"fanqie_male_{board}_ranks_*.json"))
     )
 
     if not snapshots:
-        print("未找到任何 JSON 快照文件。请先运行迁移脚本或爬虫。")
-        sys.exit(1)
+        print(f"⚠️  {BOARD_LABEL}({board}) 没有任何快照文件，跳过。")
+        return False
 
     # 根据 --date 参数选择目标快照
     if args.date:
         target_date_compact = args.date.replace("-", "")
         target_path = os.path.join(
-            data_dir, f"fanqie_male_new_ranks_{target_date_compact}.json"
+            data_dir, f"fanqie_male_{board}_ranks_{target_date_compact}.json"
         )
         if not os.path.exists(target_path):
-            print(f"❌ 未找到 {args.date} 的快照文件: {target_path}")
-            sys.exit(1)
+            print(f"⚠️  {BOARD_LABEL} 未找到 {args.date} 的快照文件，跳过: {target_path}")
+            return False
         latest_path = target_path
         # 找到该快照在列表中的位置，取前一个作为对比
         target_idx = snapshots.index(target_path) if target_path in snapshots else -1
@@ -1087,8 +1093,8 @@ def main():
         json.dump(output, f, ensure_ascii=False, indent=2)
     print(f"\n✅ 已生成: {out_path}")
 
-    # 生成静态 API 文件：api/lastest/all.json + api/lastest/<type>.json
-    api_dir = build_lastest_api(output, base_dir)
+    # 生成静态 API 文件：api/<board>/lastest/all.json + api/<board>/lastest/<type>.json
+    api_dir = build_lastest_api(output, base_dir, board)
     print(f"✅ Lastest API: {api_dir}")
 
     # 写入 trends/YYYY-MM-DD.json
@@ -1115,7 +1121,7 @@ def main():
     date_list = []
     for s in snapshots:
         fname = os.path.basename(s)
-        # fanqie_male_new_ranks_YYYYMMDD.json -> YYYY-MM-DD
+        # fanqie_male_<board>_ranks_YYYYMMDD.json -> YYYY-MM-DD
         m = re.search(r"(\d{4})(\d{2})(\d{2})", fname)
         if m:
             date_list.append(f"{m.group(1)}-{m.group(2)}-{m.group(3)}")
@@ -1123,6 +1129,36 @@ def main():
     with open(dates_path, "w", encoding="utf-8") as f:
         json.dump({"dates": sorted(date_list)}, f, ensure_ascii=False, indent=2)
     print(f"✅ 日期索引: {dates_path} ({len(date_list)} 个日期)")
+
+    return True
+
+
+def main():
+    parser = argparse.ArgumentParser(description="构建各榜单的 latest_ranks.json")
+    parser.add_argument("--force", action="store_true",
+                        help="强制重新生成所有 AI 总结，忽略已有总结")
+    parser.add_argument("--date", type=str, default="",
+                        help="指定目标日期 (YYYY-MM-DD)，默认使用最新快照")
+    parser.add_argument("--board", default="all", choices=list(BOARDS) + ["all"],
+                        help="要构建的榜单：new=新书榜, read=阅读榜, all=两个都构建（默认）")
+    args = parser.parse_args()
+
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    targets = list(BOARDS) if args.board == "all" else [args.board]
+
+    built = []
+    for board in targets:
+        print(f"\n{'=' * 52}")
+        print(f"构建 {BOARDS[board]['label']} ({board})")
+        print(f"{'=' * 52}")
+        if build_board(board, args, base_dir):
+            built.append(board)
+
+    if not built:
+        print("\n❌ 没有任何榜单成功构建。请先运行爬虫生成快照。")
+        sys.exit(1)
+
+    print(f"\n🎉 完成，已构建榜单: {', '.join(BOARDS[b]['label'] for b in built)}")
 
 
 if __name__ == "__main__":

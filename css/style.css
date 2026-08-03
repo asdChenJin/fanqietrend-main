@@ -312,6 +312,7 @@ input:focus-visible {
 .github-link-btn,
 .trend-link-btn,
 .preset-btn,
+.board-btn,
 .date-picker-btn,
 .date-nav-btn,
 .mobile-menu-btn,
@@ -383,7 +384,8 @@ input:focus-visible {
 }
 
 .date-presets,
-.trend-range {
+.trend-range,
+.board-switch {
     display: inline-flex;
     gap: 4px;
     padding: 4px;
@@ -393,7 +395,8 @@ input:focus-visible {
 }
 
 .preset-btn,
-.range-btn {
+.range-btn,
+.board-btn {
     height: 28px;
     padding: 0 12px;
     border: 0;
@@ -407,13 +410,15 @@ input:focus-visible {
 }
 
 .preset-btn:hover,
-.range-btn:hover {
+.range-btn:hover,
+.board-btn:hover {
     background: var(--surface-soft);
     color: var(--text-primary);
 }
 
 .preset-btn.active,
-.range-btn.active {
+.range-btn.active,
+.board-btn.active {
     background: var(--text-primary);
     color: #ffffff;
 }

@@ -39,11 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
     async function init() {
         try {
             const [dateIndex, latestIndex, latestAll, marketSummary] = await Promise.all([
-                fetchJson(`data/dates.json?${cacheBuster}`),
-                fetchJson(`api/lastest.json?${cacheBuster}`).catch(() => null),
-                fetchJson(`api/lastest/all.json?${cacheBuster}`)
-                    .catch(() => fetchJson(`data/latest_ranks.json?${cacheBuster}`)),
-                fetchJson(`data/market_summary.json?${cacheBuster}`).catch(() => null),
+                fetchJson(`${RankBoard.dataPath('dates.json')}?${cacheBuster}`),
+                fetchJson(`${RankBoard.apiPath('lastest.json')}?${cacheBuster}`).catch(() => null),
+                fetchJson(`${RankBoard.apiPath('lastest/all.json')}?${cacheBuster}`)
+                    .catch(() => fetchJson(`${RankBoard.dataPath('latest_ranks.json')}?${cacheBuster}`)),
+                fetchJson(`${RankBoard.dataPath('market_summary.json')}?${cacheBuster}`).catch(() => null),
             ]);
             latestData = latestAll;
             marketSummaryData = marketSummary;
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const dates = (dateIndex.dates || []).slice().sort();
             const trendDates = dates.slice(1);
             const trendFiles = await Promise.all(
-                trendDates.map(date => fetchJson(`data/trends/${date}.json?${cacheBuster}`).catch(() => null))
+                trendDates.map(date => fetchJson(`${RankBoard.dataPath(`trends/${date}.json`)}?${cacheBuster}`).catch(() => null))
             );
             trendRows = trendFiles
                 .filter(Boolean)
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function loadCategoriesFallback() {
-        const latest = await fetchJson(`data/latest_ranks.json?${cacheBuster}`);
+        const latest = await fetchJson(`${RankBoard.dataPath('latest_ranks.json')}?${cacheBuster}`);
         return (latest.categories || []).map(cat => cat.name);
     }
 
@@ -399,8 +399,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const book = latestBookMap.get(item.title) || {};
             const bookId = extractBookId(book.url);
             const detailUrl = bookId
-                ? `book.html?id=${encodeURIComponent(bookId)}`
-                : `book.html?title=${encodeURIComponent(item.title)}`;
+                ? RankBoard.withBoard(`book.html?id=${encodeURIComponent(bookId)}`)
+                : RankBoard.withBoard(`book.html?title=${encodeURIComponent(item.title)}`);
 
             return `
             <a class="compact-row compact-row-link" href="${detailUrl}" target="_blank" rel="noopener noreferrer">

@@ -6,6 +6,7 @@ import os
 import re
 import json
 import glob
+import argparse
 
 
 def parse_md_to_json(md_path: str) -> dict:
@@ -74,9 +75,16 @@ def parse_md_to_json(md_path: str) -> dict:
 
 
 def main():
+    parser = argparse.ArgumentParser(description="把旧的 Markdown 快照迁移成 JSON")
+    parser.add_argument("--board", default="new", choices=["new", "read"],
+                        help="目标榜单目录 data/<board>/，默认 new")
+    args = parser.parse_args()
+
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    data_dir = os.path.join(base_dir, "data")
-    md_files = sorted(glob.glob(os.path.join(data_dir, "fanqie_male_new_ranks_*.md")))
+    data_dir = os.path.join(base_dir, "data", args.board)
+    md_files = sorted(
+        glob.glob(os.path.join(data_dir, f"fanqie_male_{args.board}_ranks_*.md"))
+    )
 
     if not md_files:
         print("未找到任何 Markdown 文件。")

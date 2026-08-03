@@ -67,14 +67,14 @@ jobs:
           playwright install --with-deps chromium
         fi
 
-    - name: Run Scraper (仅当天)
+    - name: Run Scraper (仅当天, 新书榜 + 阅读榜)
       if: steps.date.outputs.is_today == 'true'
-      run: python scrape_fanqie_ranks.py
+      run: python scrape_fanqie_ranks.py --board all
       env:
         GITHUB_ACTIONS: true
 
     - name: Build Latest Data with AI Summary (Force)
-      run: pip install openai && python scripts/build_latest.py --force --date ${{ steps.date.outputs.dash_date }}
+      run: pip install openai && python scripts/build_latest.py --force --board all --date ${{ steps.date.outputs.dash_date }}
       env:
         API_BASE_URL: ${{ secrets.API_BASE_URL }}
         API_KEY: ${{ secrets.API_KEY }}
@@ -84,7 +84,7 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v5
       with:
         commit_message: "[Force] Re-summarize Fanqie ranks (${{ steps.date.outputs.dash_date }})"
-        file_pattern: data/*
+        file_pattern: data api
         branch: main
 
     # ---- Deploy to GitHub Pages ----

@@ -1,6 +1,7 @@
 import os
 import json
 import time
+import argparse
 from datetime import datetime
 from playwright.sync_api import sync_playwright
 
@@ -24,13 +25,38 @@ def decode_text(text: str) -> str:
 
 # 我们将直接从页面解析所有新书榜类别目录，实现动态抓取
 
-OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+DATA_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 
-def run_scraper(limit=30, sleep_sec=5):
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
+# 榜单路由格式：/rank/{频道}_{榜单类型}_{分类ID}
+#   频道:     0=女频, 1=男频
+#   榜单类型: 1=新书榜, 2=阅读榜
+# 想换回女频只需把 CHANNEL 改成 0。
+CHANNEL = 1
+
+# 每个榜单的数据各自存放在 data/<board>/ 下，互不干扰。
+# entry_category 是进入榜单的入口分类（男频分类列表中的第一个：西方奇幻），
+# 真正抓取的分类由页面动态解析得到，这里只是一个落脚点。
+BOARDS = {
+    "new": {"label": "新书榜", "rank_type": 1, "entry_category": 1141},
+    "read": {"label": "阅读榜", "rank_type": 2, "entry_category": 1141},
+}
+
+
+def board_dir(board: str) -> str:
+    return os.path.join(DATA_ROOT, board)
+
+
+def run_scraper(board="new", limit=30, sleep_sec=5):
+    if board not in BOARDS:
+        raise ValueError(f"未知榜单: {board}（可选: {', '.join(BOARDS)}）")
+    cfg = BOARDS[board]
+    rank_prefix = f"/rank/{CHANNEL}_{cfg['rank_type']}_"
+
+    output_dir = board_dir(board)
+    os.makedirs(output_dir, exist_ok=True)
     date_str = datetime.now().strftime("%Y%m%d")
-    output_file = os.path.join(OUTPUT_DIR, f"fanqie_male_new_ranks_{date_str}.json")
-    state_file = os.path.join(OUTPUT_DIR, f"task_state_{date_str}.json")
+    output_file = os.path.join(output_dir, f"fanqie_male_{board}_ranks_{date_str}.json")
+    state_file = os.path.join(output_dir, f"task_state_{date_str}.json")
     
     # ------------- 状态恢复逻辑 -------------
     completed_cats = []
@@ -63,27 +89,24 @@ def run_scraper(limit=30, sleep_sec=5):
         )
         page = context.new_page()
         
-        # 先访问新书榜的基准前缀页面，以此为入口模拟人工作业
-        # 榜单路由格式：/rank/{频道}_{榜单类型}_{分类ID}
-        #   频道: 0=女频, 1=男频      榜单类型: 1=新书榜, 2=阅读榜
-        # 1_1_1141 = 男频新书榜 · 西方奇幻（男频分类列表中的第一个）
-        init_url = "https://fanqienovel.com/rank/1_1_1141"
+        # 先访问榜单的基准前缀页面，以此为入口模拟人工作业
+        init_url = f"https://fanqienovel.com{rank_prefix}{cfg['entry_category']}"
         print(f"[{datetime.now().strftime('%H:%M:%S')}] 正在初始化并访问基础榜单页：{init_url}")
         page.goto(init_url, wait_until="load", timeout=15000)
         page.wait_for_selector('a[href^="/page/"]', timeout=5000)
         
         # 动态解析页面左侧拥有的所有类别目录 (通过匹配对应的榜单路由规律)
         categories_js = """
-        () => {
+        (prefix) => {
             return Array.from(document.querySelectorAll('a'))
-                .filter(a => a.href.includes('/rank/1_1_'))
+                .filter(a => a.href.includes(prefix))
                 .map(a => ({
                     name: a.innerText.trim(),
                     href: a.getAttribute('href')
                 }));
         }
         """
-        categories = page.evaluate(categories_js)
+        categories = page.evaluate(categories_js, rank_prefix)
         print(f"✅ 成功自适应提取到 {len(categories)} 个分类标签。开始全量模拟点击抓取下级数据...")
         
         for cat in categories:
@@ -243,6 +266,17 @@ def run_scraper(limit=30, sleep_sec=5):
         
     print(f"\n✅ 当日选定类目任务已完毕或刷新！数据源：{output_file}")
 
+
 if __name__ == "__main__":
-    print("开始执行番茄男频新书榜抓取计划...")
-    run_scraper(limit=30, sleep_sec=5)
+    parser = argparse.ArgumentParser(description="抓取番茄男频榜单")
+    parser.add_argument("--board", default="all",
+                        choices=list(BOARDS) + ["all"],
+                        help="要抓取的榜单：new=新书榜, read=阅读榜, all=两个都抓（默认）")
+    args = parser.parse_args()
+
+    targets = list(BOARDS) if args.board == "all" else [args.board]
+    for name in targets:
+        print(f"\n{'=' * 52}")
+        print(f"开始执行番茄男频{BOARDS[name]['label']}抓取计划...")
+        print(f"{'=' * 52}")
+        run_scraper(board=name, limit=30, sleep_sec=5)

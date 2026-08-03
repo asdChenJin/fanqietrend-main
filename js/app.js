@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ========== Load dates index, then load latest ==========
-    fetch(`data/dates.json?${cacheBuster}`)
+    fetch(`${RankBoard.dataPath('dates.json')}?${cacheBuster}`)
         .then(r => r.ok ? r.json() : Promise.reject('No dates.json'))
         .then(idx => {
             availableDates = idx.dates || [];
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     function loadLatestData() {
-        return fetch(`data/latest_ranks.json?${cacheBuster}`)
+        return fetch(`${RankBoard.dataPath('latest_ranks.json')}?${cacheBuster}`)
             .then(r => {
                 if (!r.ok) throw new Error('Network error');
                 return r.json();
@@ -214,8 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function loadDateData(dateStr) {
-        // dateStr = "YYYY-MM-DD", file = fanqie_male_new_ranks_YYYYMMDD.json
-        const fileDateStr = dateStr.replace(/-/g, '');
+        // dateStr = "YYYY-MM-DD"，快照路径由当前榜单决定
         const isLatest = currentDateIndex === availableDates.length - 1;
 
         if (isLatest) {
@@ -227,8 +226,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show loading state
         waterfall.innerHTML = '<p style="color:var(--text-muted);padding:20px;">加载中...</p>';
 
-        const snapshotUrl = `data/fanqie_male_new_ranks_${fileDateStr}.json?${cacheBuster}`;
-        const trendUrl = `data/trends/${dateStr}.json?${cacheBuster}`;
+        const snapshotUrl = `${RankBoard.snapshotPath(dateStr)}?${cacheBuster}`;
+        const trendUrl = `${RankBoard.dataPath(`trends/${dateStr}.json`)}?${cacheBuster}`;
 
         // Load snapshot + trends in parallel
         Promise.all([
@@ -448,7 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const rank = index + 1;
             const card = document.createElement('a');
             const bookId = extractBookId(book.url);
-            card.href = bookId ? `book.html?id=${encodeURIComponent(bookId)}` : 'javascript:void(0)';
+            card.href = bookId ? RankBoard.withBoard(`book.html?id=${encodeURIComponent(bookId)}`) : 'javascript:void(0)';
             card.rel = 'noopener';
             card.className = 'book-card';
 

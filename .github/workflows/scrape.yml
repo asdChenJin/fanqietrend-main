@@ -32,13 +32,14 @@ jobs:
       id: check_data
       run: |
         TODAY=$(date -u +"%Y%m%d")
-        FILE="data/fanqie_male_new_ranks_${TODAY}.json"
-        if [ -f "$FILE" ]; then
+        NEW_FILE="data/new/fanqie_male_new_ranks_${TODAY}.json"
+        READ_FILE="data/read/fanqie_male_read_ranks_${TODAY}.json"
+        if [ -f "$NEW_FILE" ] && [ -f "$READ_FILE" ]; then
           echo "exists=true" >> $GITHUB_OUTPUT
-          echo "✅ 今日数据已存在: $FILE，跳过爬取"
+          echo "✅ 今日两个榜单的数据都已存在，跳过爬取"
         else
           echo "exists=false" >> $GITHUB_OUTPUT
-          echo "📭 今日数据不存在，将执行爬取"
+          echo "📭 今日数据不完整，将执行爬取（新书榜 + 阅读榜）"
         fi
 
     - name: Set up Python
@@ -55,14 +56,14 @@ jobs:
           playwright install --with-deps chromium
         fi
 
-    - name: Run Scraper
+    - name: Run Scraper (新书榜 + 阅读榜)
       if: steps.check_data.outputs.exists == 'false'
-      run: python scrape_fanqie_ranks.py
+      run: python scrape_fanqie_ranks.py --board all
       env:
         GITHUB_ACTIONS: true
 
     - name: Build Latest Data with AI Summary
-      run: pip install openai && python scripts/build_latest.py
+      run: pip install openai && python scripts/build_latest.py --board all
       env:
         API_BASE_URL: ${{ secrets.API_BASE_URL }}
         API_KEY: ${{ secrets.API_KEY }}

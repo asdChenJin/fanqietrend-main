@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const dateIndex = await fetchJson(`data/dates.json?${cacheBuster}`);
+            const dateIndex = await fetchJson(`${RankBoard.dataPath('dates.json')}?${cacheBuster}`);
             const dates = (dateIndex.dates || []).slice().sort().slice(-maxDays);
             const snapshots = await Promise.all(
                 dates.map(date => fetchJson(`${snapshotUrl(date)}?${cacheBuster}`).catch(() => null))
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function snapshotUrl(date) {
-        return `data/fanqie_male_new_ranks_${date.replace(/-/g, '')}.json`;
+        return RankBoard.snapshotPath(date);
     }
 
     function fetchJson(url) {
