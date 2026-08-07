@@ -92,8 +92,18 @@ def run_scraper(board="new", limit=30, sleep_sec=5):
         # 先访问榜单的基准前缀页面，以此为入口模拟人工作业
         init_url = f"https://fanqienovel.com{rank_prefix}{cfg['entry_category']}"
         print(f"[{datetime.now().strftime('%H:%M:%S')}] 正在初始化并访问基础榜单页：{init_url}")
-        page.goto(init_url, wait_until="load", timeout=15000)
-        page.wait_for_selector('a[href^="/page/"]', timeout=5000)
+        entrance_loaded = False
+        for attempt in range(1, 5):
+            try:
+                page.goto(init_url, wait_until="load", timeout=20000)
+                page.wait_for_selector('a[href^="/page/"]', timeout=8000)
+                entrance_loaded = True
+                break
+            except Exception as e:
+                print(f"[{datetime.now().strftime('%H:%M:%S')}] ⚠️ 入口页加载失败(第{attempt}/4次)：{e}，等待 60 秒后重试")
+                time.sleep(60)
+        if not entrance_loaded:
+            raise RuntimeError(f"入口页 {init_url} 连续 4 次加载失败，终止本次任务")
         
         # 动态解析页面左侧拥有的所有类别目录 (通过匹配对应的榜单路由规律)
         categories_js = """
@@ -275,8 +285,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     targets = list(BOARDS) if args.board == "all" else [args.board]
-    for name in targets:
+    for i, name in enumerate(targets):
         print(f"\n{'=' * 52}")
         print(f"开始执行番茄男频{BOARDS[name]['label']}抓取计划...")
         print(f"{'=' * 52}")
         run_scraper(board=name, limit=30, sleep_sec=5)
+        if i < len(targets) - 1:
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] 本榜单抓取完毕，两个榜单之间休息 90 秒以降低风控触发概率")
+            time.sleep(90)
