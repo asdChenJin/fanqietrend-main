@@ -1,12 +1,12 @@
 {
-  "date": "2026-08-07",
-  "prev_date": "2026-08-06",
+  "date": "2026-08-06",
+  "prev_date": "2026-08-05",
   "periods": {
     "7": {
       "period": "近 7 日",
       "source": "ai",
-      "summary": "近7日综合赛道中都市生活、玄幻仙侠阅读增长领先，都市异能、历史军事、悬疑灵异紧随其后；具体分类的都市脑洞、玄幻脑洞、都市日常新增在读集中，都市高武、悬疑脑洞亦有表现；新上榜作品高频题材为穿越、系统、开局、无敌、觉醒、天赋，说明强设定和强爽点仍是当前新书突围核心。",
-      "fallback_summary": "近 7 日里，都市生活、玄幻仙侠 的阅读增长更强，具体分类以 都市脑洞、玄幻脑洞、都市日常 的新增在读更集中；新书题材上 穿越、系统、开局、无敌、觉醒、天赋 更高频，说明读者仍偏好强设定、强情绪钩子和明确爽点。",
+      "summary": "近7日阅读增长集中于都市生活与玄幻仙侠，具体分类中都市脑洞、玄幻脑洞、都市日常新增在读最突出。新上榜作品多围绕穿越、系统、开局、无敌、觉醒、重生展开，强设定与强爽点仍是主流。编辑判断：都市+脑洞叠加高频题材，短期流量爆发力最强。",
+      "fallback_summary": "近 7 日里，都市生活、玄幻仙侠 的阅读增长更强，具体分类以 都市脑洞、玄幻脑洞、都市日常 的新增在读更集中；新书题材上 穿越、系统、开局、无敌、觉醒、重生 更高频，说明读者仍偏好强设定、强情绪钩子和明确爽点。",
       "hot_genres": [
         {
           "name": "都市生活",
@@ -143,33 +143,28 @@
       "hot_themes": [
         {
           "name": "穿越",
-          "count": 50,
-          "category_count": 16
+          "count": 33,
+          "category_count": 14
         },
         {
           "name": "系统",
-          "count": 30,
-          "category_count": 13
+          "count": 25,
+          "category_count": 14
         },
         {
           "name": "开局",
-          "count": 28,
-          "category_count": 15
+          "count": 24,
+          "category_count": 13
         },
         {
           "name": "无敌",
-          "count": 22,
+          "count": 16,
           "category_count": 12
         },
         {
           "name": "觉醒",
-          "count": 18,
-          "category_count": 10
-        },
-        {
-          "name": "天赋",
-          "count": 9,
-          "category_count": 7
+          "count": 14,
+          "category_count": 9
         },
         {
           "name": "重生",
@@ -177,47 +172,52 @@
           "category_count": 5
         },
         {
-          "name": "长生",
-          "count": 8,
-          "category_count": 7
-        },
-        {
-          "name": "万界",
+          "name": "天赋",
           "count": 6,
           "category_count": 5
         },
         {
-          "name": "家族",
-          "count": 6,
-          "category_count": 4
+          "name": "万界",
+          "count": 5,
+          "category_count": 5
         },
         {
-          "name": "直播",
-          "count": 6,
+          "name": "国运",
+          "count": 5,
           "category_count": 3
         },
         {
-          "name": "退婚",
+          "name": "洪荒",
           "count": 5,
-          "category_count": 4
+          "category_count": 1
+        },
+        {
+          "name": "盗墓",
+          "count": 5,
+          "category_count": 1
         },
         {
           "name": "武道",
-          "count": 5,
+          "count": 4,
           "category_count": 4
         },
         {
           "name": "诸天",
-          "count": 5,
+          "count": 4,
           "category_count": 4
+        },
+        {
+          "name": "三国",
+          "count": 4,
+          "category_count": 2
         }
       ]
     },
     "14": {
       "period": "近 14 日",
       "source": "ai",
-      "summary": "近14日综合赛道以都市生活、玄幻仙侠的阅读增长最强，都市异能、历史军事、悬疑灵异构成第二梯队；具体分类里都市脑洞、玄幻脑洞、都市日常新增在读最集中，都市高武、悬疑脑洞贡献明显；新书题材集中在穿越、系统、开局、无敌、觉醒、天赋，可见读者对快节奏情绪钩子与明确金手指的偏好持续主导新书市场。",
-      "fallback_summary": "近 14 日里，都市生活、玄幻仙侠 的阅读增长更强，具体分类以 都市脑洞、玄幻脑洞、都市日常 的新增在读更集中；新书题材上 穿越、系统、开局、无敌、觉醒、天赋 更高频，说明读者仍偏好强设定、强情绪钩子和明确爽点。",
+      "summary": "近14日阅读增长以都市生活、玄幻仙侠领跑，都市异能、历史军事、悬疑灵异紧随其后；都市脑洞、玄幻脑洞、都市日常在读增量集中。新书中穿越、系统、开局、无敌、觉醒、重生占据主导，读者偏好快速代入与情绪刺激。编辑判断：围绕“脑洞+开局”设计开篇，更易在新书期突围。",
+      "fallback_summary": "近 14 日里，都市生活、玄幻仙侠 的阅读增长更强，具体分类以 都市脑洞、玄幻脑洞、都市日常 的新增在读更集中；新书题材上 穿越、系统、开局、无敌、觉醒、重生 更高频，说明读者仍偏好强设定、强情绪钩子和明确爽点。",
       "hot_genres": [
         {
           "name": "都市生活",
@@ -354,33 +354,28 @@
       "hot_themes": [
         {
           "name": "穿越",
-          "count": 50,
-          "category_count": 16
+          "count": 33,
+          "category_count": 14
         },
         {
           "name": "系统",
-          "count": 30,
-          "category_count": 13
+          "count": 25,
+          "category_count": 14
         },
         {
           "name": "开局",
-          "count": 28,
-          "category_count": 15
+          "count": 24,
+          "category_count": 13
         },
         {
           "name": "无敌",
-          "count": 22,
+          "count": 16,
           "category_count": 12
         },
         {
           "name": "觉醒",
-          "count": 18,
-          "category_count": 10
-        },
-        {
-          "name": "天赋",
-          "count": 9,
-          "category_count": 7
+          "count": 14,
+          "category_count": 9
         },
         {
           "name": "重生",
@@ -388,47 +383,52 @@
           "category_count": 5
         },
         {
-          "name": "长生",
-          "count": 8,
-          "category_count": 7
-        },
-        {
-          "name": "万界",
+          "name": "天赋",
           "count": 6,
           "category_count": 5
         },
         {
-          "name": "家族",
-          "count": 6,
-          "category_count": 4
+          "name": "万界",
+          "count": 5,
+          "category_count": 5
         },
         {
-          "name": "直播",
-          "count": 6,
+          "name": "国运",
+          "count": 5,
           "category_count": 3
         },
         {
-          "name": "退婚",
+          "name": "洪荒",
           "count": 5,
-          "category_count": 4
+          "category_count": 1
+        },
+        {
+          "name": "盗墓",
+          "count": 5,
+          "category_count": 1
         },
         {
           "name": "武道",
-          "count": 5,
+          "count": 4,
           "category_count": 4
         },
         {
           "name": "诸天",
-          "count": 5,
+          "count": 4,
           "category_count": 4
+        },
+        {
+          "name": "三国",
+          "count": 4,
+          "category_count": 2
         }
       ]
     },
     "30": {
       "period": "近 30 日",
       "source": "ai",
-      "summary": "近30日综合赛道中都市生活、玄幻仙侠阅读增长领跑，都市异能、历史军事、悬疑灵异保持稳定增量；具体分类以都市脑洞、玄幻脑洞、都市日常的新增在读最为突出，都市高武、悬疑脑洞也有不错表现；新上榜作品高频题材为穿越、系统、开局、无敌、觉醒、天赋，编辑判断：强设定开篇与即时爽感仍是新书起量的核心抓手。",
-      "fallback_summary": "近 30 日里，都市生活、玄幻仙侠 的阅读增长更强，具体分类以 都市脑洞、玄幻脑洞、都市日常 的新增在读更集中；新书题材上 穿越、系统、开局、无敌、觉醒、天赋 更高频，说明读者仍偏好强设定、强情绪钩子和明确爽点。",
+      "summary": "近30日都市生活、玄幻仙侠的阅读增长最强，都市异能、历史军事、悬疑灵异亦有稳定增量；细分赛道都市脑洞、玄幻脑洞、都市日常表现突出。新上榜作品高频题材为穿越、系统、开局、无敌、觉醒、重生，强钩子、金手指、升级感仍是创作核心。编辑判断：都市脑洞融合系统开局，是当前最稳妥的爆款公式。",
+      "fallback_summary": "近 30 日里，都市生活、玄幻仙侠 的阅读增长更强，具体分类以 都市脑洞、玄幻脑洞、都市日常 的新增在读更集中；新书题材上 穿越、系统、开局、无敌、觉醒、重生 更高频，说明读者仍偏好强设定、强情绪钩子和明确爽点。",
       "hot_genres": [
         {
           "name": "都市生活",
@@ -565,33 +565,28 @@
       "hot_themes": [
         {
           "name": "穿越",
-          "count": 50,
-          "category_count": 16
+          "count": 33,
+          "category_count": 14
         },
         {
           "name": "系统",
-          "count": 30,
-          "category_count": 13
+          "count": 25,
+          "category_count": 14
         },
         {
           "name": "开局",
-          "count": 28,
-          "category_count": 15
+          "count": 24,
+          "category_count": 13
         },
         {
           "name": "无敌",
-          "count": 22,
+          "count": 16,
           "category_count": 12
         },
         {
           "name": "觉醒",
-          "count": 18,
-          "category_count": 10
-        },
-        {
-          "name": "天赋",
-          "count": 9,
-          "category_count": 7
+          "count": 14,
+          "category_count": 9
         },
         {
           "name": "重生",
@@ -599,47 +594,52 @@
           "category_count": 5
         },
         {
-          "name": "长生",
-          "count": 8,
-          "category_count": 7
-        },
-        {
-          "name": "万界",
+          "name": "天赋",
           "count": 6,
           "category_count": 5
         },
         {
-          "name": "家族",
-          "count": 6,
-          "category_count": 4
+          "name": "万界",
+          "count": 5,
+          "category_count": 5
         },
         {
-          "name": "直播",
-          "count": 6,
+          "name": "国运",
+          "count": 5,
           "category_count": 3
         },
         {
-          "name": "退婚",
+          "name": "洪荒",
           "count": 5,
-          "category_count": 4
+          "category_count": 1
+        },
+        {
+          "name": "盗墓",
+          "count": 5,
+          "category_count": 1
         },
         {
           "name": "武道",
-          "count": 5,
+          "count": 4,
           "category_count": 4
         },
         {
           "name": "诸天",
-          "count": 5,
+          "count": 4,
           "category_count": 4
+        },
+        {
+          "name": "三国",
+          "count": 4,
+          "category_count": 2
         }
       ]
     },
     "all": {
       "period": "全部样本",
       "source": "ai",
-      "summary": "全部样本中，都市生活、玄幻仙侠的阅读增长最强，都市异能、历史军事、悬疑灵异紧随其后；具体分类以都市脑洞、玄幻脑洞、都市日常的新增在读最为集中，都市高武、悬疑脑洞次之；新书题材高频词为穿越、系统、开局、无敌、觉醒、天赋，说明平台新书仍依赖强设定、强情绪钩子和明确爽点来驱动阅读增长。",
-      "fallback_summary": "全部样本里，都市生活、玄幻仙侠 的阅读增长更强，具体分类以 都市脑洞、玄幻脑洞、都市日常 的新增在读更集中；新书题材上 穿越、系统、开局、无敌、觉醒、天赋 更高频，说明读者仍偏好强设定、强情绪钩子和明确爽点。",
+      "summary": "全部样本中，都市生活与玄幻仙侠阅读增长最强，都市脑洞、玄幻脑洞、都市日常新增在读最为集中；新上榜作品集中于穿越、系统、开局、无敌、觉醒、重生等题材。可见市场持续偏好强设定、强情绪与明确爽点。编辑判断：选择都市脑洞或玄幻脑洞，叠加高频题材词，可提高新书起量概率。",
+      "fallback_summary": "全部样本里，都市生活、玄幻仙侠 的阅读增长更强，具体分类以 都市脑洞、玄幻脑洞、都市日常 的新增在读更集中；新书题材上 穿越、系统、开局、无敌、觉醒、重生 更高频，说明读者仍偏好强设定、强情绪钩子和明确爽点。",
       "hot_genres": [
         {
           "name": "都市生活",
@@ -776,33 +776,28 @@
       "hot_themes": [
         {
           "name": "穿越",
-          "count": 50,
-          "category_count": 16
+          "count": 33,
+          "category_count": 14
         },
         {
           "name": "系统",
-          "count": 30,
-          "category_count": 13
+          "count": 25,
+          "category_count": 14
         },
         {
           "name": "开局",
-          "count": 28,
-          "category_count": 15
+          "count": 24,
+          "category_count": 13
         },
         {
           "name": "无敌",
-          "count": 22,
+          "count": 16,
           "category_count": 12
         },
         {
           "name": "觉醒",
-          "count": 18,
-          "category_count": 10
-        },
-        {
-          "name": "天赋",
-          "count": 9,
-          "category_count": 7
+          "count": 14,
+          "category_count": 9
         },
         {
           "name": "重生",
@@ -810,39 +805,44 @@
           "category_count": 5
         },
         {
-          "name": "长生",
-          "count": 8,
-          "category_count": 7
-        },
-        {
-          "name": "万界",
+          "name": "天赋",
           "count": 6,
           "category_count": 5
         },
         {
-          "name": "家族",
-          "count": 6,
-          "category_count": 4
+          "name": "万界",
+          "count": 5,
+          "category_count": 5
         },
         {
-          "name": "直播",
-          "count": 6,
+          "name": "国运",
+          "count": 5,
           "category_count": 3
         },
         {
-          "name": "退婚",
+          "name": "洪荒",
           "count": 5,
-          "category_count": 4
+          "category_count": 1
+        },
+        {
+          "name": "盗墓",
+          "count": 5,
+          "category_count": 1
         },
         {
           "name": "武道",
-          "count": 5,
+          "count": 4,
           "category_count": 4
         },
         {
           "name": "诸天",
-          "count": 5,
+          "count": 4,
           "category_count": 4
+        },
+        {
+          "name": "三国",
+          "count": 4,
+          "category_count": 2
         }
       ]
     }
