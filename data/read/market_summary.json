@@ -1,12 +1,12 @@
 {
-  "date": "2026-08-06",
-  "prev_date": "2026-08-05",
+  "date": "2026-08-07",
+  "prev_date": "2026-08-06",
   "periods": {
     "7": {
       "period": "近 7 日",
       "source": "ai",
-      "summary": "近7日，悬疑灵异新增在读99.2万领跑，都市异能、玄幻仙侠紧随其后；具体分类中悬疑脑洞、玄幻脑洞、都市高武的新增在读高度集中。新上榜作品以系统、穿越、开局、觉醒、修仙、重生等题材居多。判断：读者偏好强设定与强情绪钩子，可重点布局悬疑脑洞和系统流。",
-      "fallback_summary": "近 7 日里，悬疑灵异、都市异能 的阅读增长更强，具体分类以 悬疑脑洞、玄幻脑洞、都市高武 的新增在读更集中；新书题材上 系统、穿越、开局、觉醒、修仙、重生 更高频，说明读者仍偏好强设定、强情绪钩子和明确爽点。",
+      "summary": "近7日综合赛道悬疑灵异、都市异能阅读增长领先，玄幻仙侠、都市生活紧随其后；具体分类中悬疑脑洞、玄幻脑洞、都市高武新增在读最集中。新书题材以系统、穿越、觉醒、开局、重生、无敌为主。判断：读者偏爱强设定、强情绪钩子和即时爽点，开篇需高冲击。",
+      "fallback_summary": "近 7 日里，悬疑灵异、都市异能 的阅读增长更强，具体分类以 悬疑脑洞、玄幻脑洞、都市高武 的新增在读更集中；新书题材上 系统、穿越、觉醒、开局、重生、无敌 更高频，说明读者仍偏好强设定、强情绪钩子和明确爽点。",
       "hot_genres": [
         {
           "name": "悬疑灵异",
@@ -143,33 +143,38 @@
       "hot_themes": [
         {
           "name": "系统",
-          "count": 17,
+          "count": 19,
           "category_count": 10
         },
         {
           "name": "穿越",
-          "count": 11,
+          "count": 15,
+          "category_count": 12
+        },
+        {
+          "name": "觉醒",
+          "count": 14,
           "category_count": 9
         },
         {
           "name": "开局",
-          "count": 11,
+          "count": 12,
           "category_count": 6
         },
         {
-          "name": "觉醒",
-          "count": 9,
-          "category_count": 9
-        },
-        {
-          "name": "修仙",
-          "count": 6,
+          "name": "重生",
+          "count": 10,
           "category_count": 5
         },
         {
-          "name": "重生",
+          "name": "无敌",
           "count": 6,
-          "category_count": 3
+          "category_count": 4
+        },
+        {
+          "name": "修仙",
+          "count": 5,
+          "category_count": 4
         },
         {
           "name": "天赋",
@@ -177,9 +182,14 @@
           "category_count": 4
         },
         {
-          "name": "无敌",
+          "name": "末世",
           "count": 4,
           "category_count": 3
+        },
+        {
+          "name": "争霸",
+          "count": 4,
+          "category_count": 2
         },
         {
           "name": "反派",
@@ -187,9 +197,9 @@
           "category_count": 3
         },
         {
-          "name": "末世",
-          "count": 3,
-          "category_count": 3
+          "name": "签到",
+          "count": 2,
+          "category_count": 2
         },
         {
           "name": "高武",
@@ -197,27 +207,17 @@
           "category_count": 2
         },
         {
-          "name": "争霸",
+          "name": "无限流",
           "count": 2,
           "category_count": 2
-        },
-        {
-          "name": "美食",
-          "count": 2,
-          "category_count": 2
-        },
-        {
-          "name": "抗战",
-          "count": 2,
-          "category_count": 1
         }
       ]
     },
     "14": {
       "period": "近 14 日",
       "source": "ai",
-      "summary": "近14日，悬疑灵异、都市异能、玄幻仙侠阅读增长领先，都市生活同样强势；具体分类里悬疑脑洞、玄幻脑洞、都市高武新增在读最为集中。新上榜作品高频题材为系统、穿越、开局、觉醒、修仙、重生。判断：强设定与明确爽点仍是核心吸引力，可关注脑洞类与系统流。",
-      "fallback_summary": "近 14 日里，悬疑灵异、都市异能 的阅读增长更强，具体分类以 悬疑脑洞、玄幻脑洞、都市高武 的新增在读更集中；新书题材上 系统、穿越、开局、觉醒、修仙、重生 更高频，说明读者仍偏好强设定、强情绪钩子和明确爽点。",
+      "summary": "近14日悬疑灵异、都市异能阅读增长最强，玄幻仙侠与都市生活同样突出；具体分类里悬疑脑洞、玄幻脑洞、都市高武在读增量集中。新书题材高频为系统、穿越、觉醒、开局、重生、无敌。判断：强设定与明确爽点仍是核心拉力，开局即要立住期待感。",
+      "fallback_summary": "近 14 日里，悬疑灵异、都市异能 的阅读增长更强，具体分类以 悬疑脑洞、玄幻脑洞、都市高武 的新增在读更集中；新书题材上 系统、穿越、觉醒、开局、重生、无敌 更高频，说明读者仍偏好强设定、强情绪钩子和明确爽点。",
       "hot_genres": [
         {
           "name": "悬疑灵异",
@@ -354,33 +354,38 @@
       "hot_themes": [
         {
           "name": "系统",
-          "count": 17,
+          "count": 19,
           "category_count": 10
         },
         {
           "name": "穿越",
-          "count": 11,
+          "count": 15,
+          "category_count": 12
+        },
+        {
+          "name": "觉醒",
+          "count": 14,
           "category_count": 9
         },
         {
           "name": "开局",
-          "count": 11,
+          "count": 12,
           "category_count": 6
         },
         {
-          "name": "觉醒",
-          "count": 9,
-          "category_count": 9
-        },
-        {
-          "name": "修仙",
-          "count": 6,
+          "name": "重生",
+          "count": 10,
           "category_count": 5
         },
         {
-          "name": "重生",
+          "name": "无敌",
           "count": 6,
-          "category_count": 3
+          "category_count": 4
+        },
+        {
+          "name": "修仙",
+          "count": 5,
+          "category_count": 4
         },
         {
           "name": "天赋",
@@ -388,9 +393,14 @@
           "category_count": 4
         },
         {
-          "name": "无敌",
+          "name": "末世",
           "count": 4,
           "category_count": 3
+        },
+        {
+          "name": "争霸",
+          "count": 4,
+          "category_count": 2
         },
         {
           "name": "反派",
@@ -398,9 +408,9 @@
           "category_count": 3
         },
         {
-          "name": "末世",
-          "count": 3,
-          "category_count": 3
+          "name": "签到",
+          "count": 2,
+          "category_count": 2
         },
         {
           "name": "高武",
@@ -408,27 +418,17 @@
           "category_count": 2
         },
         {
-          "name": "争霸",
+          "name": "无限流",
           "count": 2,
           "category_count": 2
-        },
-        {
-          "name": "美食",
-          "count": 2,
-          "category_count": 2
-        },
-        {
-          "name": "抗战",
-          "count": 2,
-          "category_count": 1
         }
       ]
     },
     "30": {
       "period": "近 30 日",
       "source": "ai",
-      "summary": "近30日，悬疑灵异与都市异能阅读增长明显，玄幻仙侠、都市生活表现稳定；具体分类中悬疑脑洞、玄幻脑洞、都市高武新增在读突出。新书题材集中于系统、穿越、开局、觉醒、修仙、重生。判断：读者持续偏好强情绪钩子，悬疑脑洞和都市高武具备更热潜力。",
-      "fallback_summary": "近 30 日里，悬疑灵异、都市异能 的阅读增长更强，具体分类以 悬疑脑洞、玄幻脑洞、都市高武 的新增在读更集中；新书题材上 系统、穿越、开局、觉醒、修仙、重生 更高频，说明读者仍偏好强设定、强情绪钩子和明确爽点。",
+      "summary": "近30日综合赛道以悬疑灵异、都市异能阅读增长居首，玄幻仙侠、都市生活紧跟；具体分类集中在悬疑脑洞、玄幻脑洞、都市高武。新书题材多见系统、穿越、觉醒、开局、重生、无敌。判断：读者持续偏好快节奏、强情绪和高浓度金手指，创作需前置钩子。",
+      "fallback_summary": "近 30 日里，悬疑灵异、都市异能 的阅读增长更强，具体分类以 悬疑脑洞、玄幻脑洞、都市高武 的新增在读更集中；新书题材上 系统、穿越、觉醒、开局、重生、无敌 更高频，说明读者仍偏好强设定、强情绪钩子和明确爽点。",
       "hot_genres": [
         {
           "name": "悬疑灵异",
@@ -565,33 +565,38 @@
       "hot_themes": [
         {
           "name": "系统",
-          "count": 17,
+          "count": 19,
           "category_count": 10
         },
         {
           "name": "穿越",
-          "count": 11,
+          "count": 15,
+          "category_count": 12
+        },
+        {
+          "name": "觉醒",
+          "count": 14,
           "category_count": 9
         },
         {
           "name": "开局",
-          "count": 11,
+          "count": 12,
           "category_count": 6
         },
         {
-          "name": "觉醒",
-          "count": 9,
-          "category_count": 9
-        },
-        {
-          "name": "修仙",
-          "count": 6,
+          "name": "重生",
+          "count": 10,
           "category_count": 5
         },
         {
-          "name": "重生",
+          "name": "无敌",
           "count": 6,
-          "category_count": 3
+          "category_count": 4
+        },
+        {
+          "name": "修仙",
+          "count": 5,
+          "category_count": 4
         },
         {
           "name": "天赋",
@@ -599,9 +604,14 @@
           "category_count": 4
         },
         {
-          "name": "无敌",
+          "name": "末世",
           "count": 4,
           "category_count": 3
+        },
+        {
+          "name": "争霸",
+          "count": 4,
+          "category_count": 2
         },
         {
           "name": "反派",
@@ -609,9 +619,9 @@
           "category_count": 3
         },
         {
-          "name": "末世",
-          "count": 3,
-          "category_count": 3
+          "name": "签到",
+          "count": 2,
+          "category_count": 2
         },
         {
           "name": "高武",
@@ -619,27 +629,17 @@
           "category_count": 2
         },
         {
-          "name": "争霸",
+          "name": "无限流",
           "count": 2,
           "category_count": 2
-        },
-        {
-          "name": "美食",
-          "count": 2,
-          "category_count": 2
-        },
-        {
-          "name": "抗战",
-          "count": 2,
-          "category_count": 1
         }
       ]
     },
     "all": {
       "period": "全部样本",
       "source": "ai",
-      "summary": "全部样本里，悬疑灵异新增在读最高，都市异能、玄幻仙侠阅读增长强劲；具体分类以悬疑脑洞、玄幻脑洞、都市高武的新增在读为主。新上榜作品题材多为系统、穿越、开局、觉醒、修仙、重生。判断：市场整体青睐强设定、强钩子，悬疑脑洞与系统流仍是主流方向。",
-      "fallback_summary": "全部样本里，悬疑灵异、都市异能 的阅读增长更强，具体分类以 悬疑脑洞、玄幻脑洞、都市高武 的新增在读更集中；新书题材上 系统、穿越、开局、觉醒、修仙、重生 更高频，说明读者仍偏好强设定、强情绪钩子和明确爽点。",
+      "summary": "全部样本中悬疑灵异、都市异能阅读增长领先，玄幻仙侠、都市生活次之；具体分类以悬疑脑洞、玄幻脑洞、都市高武新增在读为主。新书题材高频词为系统、穿越、觉醒、开局、重生、无敌。判断：强设定、强情绪钩子与明确爽点始终是爆款共性，开篇需直击核心卖点。",
+      "fallback_summary": "全部样本里，悬疑灵异、都市异能 的阅读增长更强，具体分类以 悬疑脑洞、玄幻脑洞、都市高武 的新增在读更集中；新书题材上 系统、穿越、觉醒、开局、重生、无敌 更高频，说明读者仍偏好强设定、强情绪钩子和明确爽点。",
       "hot_genres": [
         {
           "name": "悬疑灵异",
@@ -776,33 +776,38 @@
       "hot_themes": [
         {
           "name": "系统",
-          "count": 17,
+          "count": 19,
           "category_count": 10
         },
         {
           "name": "穿越",
-          "count": 11,
+          "count": 15,
+          "category_count": 12
+        },
+        {
+          "name": "觉醒",
+          "count": 14,
           "category_count": 9
         },
         {
           "name": "开局",
-          "count": 11,
+          "count": 12,
           "category_count": 6
         },
         {
-          "name": "觉醒",
-          "count": 9,
-          "category_count": 9
-        },
-        {
-          "name": "修仙",
-          "count": 6,
+          "name": "重生",
+          "count": 10,
           "category_count": 5
         },
         {
-          "name": "重生",
+          "name": "无敌",
           "count": 6,
-          "category_count": 3
+          "category_count": 4
+        },
+        {
+          "name": "修仙",
+          "count": 5,
+          "category_count": 4
         },
         {
           "name": "天赋",
@@ -810,9 +815,14 @@
           "category_count": 4
         },
         {
-          "name": "无敌",
+          "name": "末世",
           "count": 4,
           "category_count": 3
+        },
+        {
+          "name": "争霸",
+          "count": 4,
+          "category_count": 2
         },
         {
           "name": "反派",
@@ -820,9 +830,9 @@
           "category_count": 3
         },
         {
-          "name": "末世",
-          "count": 3,
-          "category_count": 3
+          "name": "签到",
+          "count": 2,
+          "category_count": 2
         },
         {
           "name": "高武",
@@ -830,19 +840,9 @@
           "category_count": 2
         },
         {
-          "name": "争霸",
+          "name": "无限流",
           "count": 2,
           "category_count": 2
-        },
-        {
-          "name": "美食",
-          "count": 2,
-          "category_count": 2
-        },
-        {
-          "name": "抗战",
-          "count": 2,
-          "category_count": 1
         }
       ]
     }
