@@ -756,31 +756,48 @@ def parse_json_object(text: str) -> dict:
 
 
 def enrich_market_summary_with_ai(payload: dict, api_key: str,
-                                  base_url: str, model: str) -> dict:
-    """使用 AI 改写全站热点总结；失败时保留规则兜底。"""
+                                  base_url: str, model: str,
+                                  max_retries: int = 3) -> dict:
+    """使用 AI 改写全站热点总结；重试耗尽后保留规则兜底。"""
     try:
         from openai import OpenAI
     except ImportError:
         print("⚠️  openai 库未安装，跳过全站热点 AI 总结。")
         return payload
 
-    try:
-        client = OpenAI(api_key=api_key, base_url=base_url, timeout=120.0)
-        response = client.chat.completions.create(
-            model=model,
-            messages=[{"role": "user", "content": build_market_ai_prompt(payload)}],
-            max_tokens=900,
-            temperature=0.5,
-        )
-        parsed = parse_json_object(response.choices[0].message.content)
-        for key, summary in parsed.items():
-            if key in payload["periods"] and isinstance(summary, str) and summary.strip():
-                payload["periods"][key]["summary"] = summary.strip()
-                payload["periods"][key]["source"] = "ai"
-        print("✅ 全站热点 AI 总结已生成")
-    except Exception as e:
-        print(f"⚠️  全站热点 AI 总结失败，使用规则兜底: {e}")
+    client = OpenAI(api_key=api_key, base_url=base_url, timeout=120.0)
+    prompt = build_market_ai_prompt(payload)
 
+    for attempt in range(1, max_retries + 1):
+        try:
+            response = client.chat.completions.create(
+                model=model,
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=2000,
+                temperature=0.5,
+            )
+            choice = response.choices[0]
+            content = choice.message.content
+            if not content or not content.strip():
+                # 打出 finish_reason 才能区分「被 max_tokens 截断」和「服务端返回空」
+                raise ValueError(
+                    f"API 返回空内容 (finish_reason={choice.finish_reason})"
+                )
+            parsed = parse_json_object(content)
+            for key, summary in parsed.items():
+                if key in payload["periods"] and isinstance(summary, str) and summary.strip():
+                    payload["periods"][key]["summary"] = summary.strip()
+                    payload["periods"][key]["source"] = "ai"
+            print("✅ 全站热点 AI 总结已生成")
+            return payload
+
+        except Exception as e:
+            print(f"  ⚠️  全站热点 AI 总结第 {attempt} 次失败: {e}")
+            if attempt < max_retries:
+                import time
+                time.sleep(5 * attempt)
+
+    print(f"⚠️  全站热点 AI 总结已重试 {max_retries} 次仍失败，使用规则兜底。")
     return payload
 
 
