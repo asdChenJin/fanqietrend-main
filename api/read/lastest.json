@@ -1,12 +1,12 @@
 {
-  "date": "2026-09-16",
-  "prev_date": "2026-09-15",
+  "date": "2026-09-17",
+  "prev_date": "2026-09-16",
   "types": [
     {
       "type": "all",
       "url": "api/read/lastest/all.json",
       "category_count": 19,
-      "book_count": 380
+      "book_count": 330
     },
     {
       "type": "西方奇幻",
@@ -21,7 +21,7 @@
     {
       "type": "科幻末世",
       "url": "api/read/lastest/%E7%A7%91%E5%B9%BB%E6%9C%AB%E4%B8%96.json",
-      "book_count": 20
+      "book_count": 0
     },
     {
       "type": "都市日常",
@@ -31,7 +31,7 @@
     {
       "type": "都市修真",
       "url": "api/read/lastest/%E9%83%BD%E5%B8%82%E4%BF%AE%E7%9C%9F.json",
-      "book_count": 20
+      "book_count": 0
     },
     {
       "type": "都市高武",
@@ -71,7 +71,7 @@
     {
       "type": "都市脑洞",
       "url": "api/read/lastest/%E9%83%BD%E5%B8%82%E8%84%91%E6%B4%9E.json",
-      "book_count": 20
+      "book_count": 10
     },
     {
       "type": "玄幻脑洞",
