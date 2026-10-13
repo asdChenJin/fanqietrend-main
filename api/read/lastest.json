@@ -1,12 +1,12 @@
 {
-  "date": "2026-10-12",
-  "prev_date": "2026-10-11",
+  "date": "2026-10-13",
+  "prev_date": "2026-10-12",
   "types": [
     {
       "type": "all",
       "url": "api/read/lastest/all.json",
       "category_count": 19,
-      "book_count": 380
+      "book_count": 360
     },
     {
       "type": "西方奇幻",
@@ -96,7 +96,7 @@
     {
       "type": "动漫衍生",
       "url": "api/read/lastest/%E5%8A%A8%E6%BC%AB%E8%A1%8D%E7%94%9F.json",
-      "book_count": 20
+      "book_count": 0
     },
     {
       "type": "男频衍生",

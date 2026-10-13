@@ -1,12 +1,12 @@
 {
-  "date": "2026-10-12",
-  "prev_date": "2026-10-11",
+  "date": "2026-10-13",
+  "prev_date": "2026-10-12",
   "types": [
     {
       "type": "all",
       "url": "api/new/lastest/all.json",
       "category_count": 19,
-      "book_count": 380
+      "book_count": 370
     },
     {
       "type": "西方奇幻",
@@ -91,7 +91,7 @@
     {
       "type": "游戏体育",
       "url": "api/new/lastest/%E6%B8%B8%E6%88%8F%E4%BD%93%E8%82%B2.json",
-      "book_count": 20
+      "book_count": 10
     },
     {
       "type": "动漫衍生",
